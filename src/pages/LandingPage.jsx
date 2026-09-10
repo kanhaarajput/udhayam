@@ -5,7 +5,6 @@ import {
   CheckCircle2, Bot, FolderLock, ShieldAlert, ArrowRight, 
   ChevronDown, Check, Star, Zap, Users, BarChart3
 } from 'lucide-react';
-import { ThemeToggle } from '../components/ThemeToggle';
 import './LandingPage.css';
 
 const FAQS = [
@@ -17,8 +16,7 @@ const FAQS = [
 
 export function LandingPage() {
   const navigate = useNavigate();
-  const [isAnnual, setIsAnnual] = useState(true);
-  const [openFaq, setOpenFaq] = useState(0);
+  const [openFaq, setOpenFaq] = useState(-1);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -41,11 +39,9 @@ export function LandingPage() {
           </div>
           <div className="nav-links">
             <a href="#features">Features</a>
-            <a href="#pricing">Pricing</a>
             <a href="#faq">FAQ</a>
           </div>
           <div className="nav-actions">
-            <ThemeToggle />
             <button className="nav-login" onClick={() => navigate('/login')}>Log In</button>
             <Button variant="primary" onClick={() => navigate('/dashboard')}>
               Start Free Trial
@@ -133,78 +129,6 @@ export function LandingPage() {
             <div className="bento-icon"><Users size={32} /></div>
             <h3>Team & Access Control</h3>
             <p>Invite accountants and legal advisors with strict Role-Based Access Control (RBAC).</p>
-          </div>
-
-        </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section id="pricing" className="pricing-section">
-        <div className="section-header">
-          <h2>Simple, transparent pricing</h2>
-          <p>No hidden government fees. No surprise charges.</p>
-        </div>
-
-        <div className="pricing-toggle-wrapper">
-          <span className={!isAnnual ? 'active' : ''}>Monthly</span>
-          <div className="toggle-track" onClick={() => setIsAnnual(!isAnnual)}>
-            <div className={`toggle-thumb ${isAnnual ? 'annual' : ''}`}></div>
-          </div>
-          <span className={isAnnual ? 'active' : ''}>Annually <span className="save-badge">Save 20%</span></span>
-        </div>
-
-        <div className="pricing-cards">
-          
-          <div className="pricing-card">
-            <div className="pc-header">
-              <h3>Starter</h3>
-              <p>For solopreneurs</p>
-            </div>
-            <div className="pc-price">
-              <h2>₹{isAnnual ? '999' : '1,299'}<span>/mo</span></h2>
-            </div>
-            <ul className="pc-features">
-              <li><Check size={18}/> Up to 2 active applications</li>
-              <li><Check size={18}/> 5GB Document Vault</li>
-              <li><Check size={18}/> Standard Email Support</li>
-            </ul>
-            <Button variant="outline" className="pc-btn" onClick={() => navigate('/dashboard')}>Start Free</Button>
-          </div>
-
-          <div className="pricing-card popular">
-            <div className="popular-ribbon">Most Popular</div>
-            <div className="pc-header">
-              <h3>Professional</h3>
-              <p>For growing teams</p>
-            </div>
-            <div className="pc-price">
-              <h2>₹{isAnnual ? '2,499' : '2,999'}<span>/mo</span></h2>
-            </div>
-            <ul className="pc-features">
-              <li><Check size={18}/> Unlimited applications</li>
-              <li><Check size={18}/> 50GB Document Vault</li>
-              <li><Check size={18}/> Udyam AI Copilot (100 msgs/mo)</li>
-              <li><Check size={18}/> 3 Team Members</li>
-            </ul>
-            <Button variant="primary" className="pc-btn" onClick={() => navigate('/dashboard')}>Start 14-Day Trial</Button>
-          </div>
-
-          <div className="pricing-card">
-            <div className="pc-header">
-              <h3>Enterprise</h3>
-              <p>For large organizations</p>
-            </div>
-            <div className="pc-price">
-              <h2>₹{isAnnual ? '9,999' : '11,999'}<span>/mo</span></h2>
-            </div>
-            <ul className="pc-features">
-              <li><Check size={18}/> Everything in Professional</li>
-              <li><Check size={18}/> Unlimited Team Members</li>
-              <li><Check size={18}/> Unlimited AI Copilot</li>
-              <li><Check size={18}/> Dedicated Account Manager</li>
-              <li><Check size={18}/> API Access</li>
-            </ul>
-            <Button variant="outline" className="pc-btn" onClick={() => navigate('/dashboard')}>Contact Sales</Button>
           </div>
 
         </div>

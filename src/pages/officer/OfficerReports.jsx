@@ -31,7 +31,7 @@ export function OfficerReports() {
   const applications = useAppStore((state) => state.applications);
 
   // Dynamic calculations based on global store
-  const { statusData, departmentData, monthlyData } = useMemo(() => {
+  const { statusData, monthlyData } = useMemo(() => {
     
     // Status Distribution
     const statusCount = {};

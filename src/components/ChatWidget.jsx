@@ -56,7 +56,7 @@ export function ChatWidget() {
         setIsTyping(false);
       }, 1000);
     }
-  }, [isOpen, messages.length, profile.companyName, pendingApps]);
+  }, [isOpen, messages.length, profile.companyName, pendingApps, hasOverdueCompliance]);
 
   const handleActionClick = (route) => {
     setIsOpen(false);
@@ -98,7 +98,7 @@ export function ChatWidget() {
   return (
     <>
       <button 
-        className={`chat-toggle-btn ${isOpen ? 'hidden' : 'bounce-in'}`} 
+        className={`chat-toggle-btn chat-fab ${isOpen ? 'hidden' : 'bounce-in'}`} 
         onClick={() => setIsOpen(true)}
       >
         <Sparkles size={20} className="sparkle-icon" />

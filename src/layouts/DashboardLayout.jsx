@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Settings, LayoutDashboard, User, Folder, Search, CheckSquare, 
@@ -7,16 +7,13 @@ import {
 import { useAppStore } from '../store/useAppStore';
 import { LanguageToggle } from '../components/LanguageToggle';
 import { ChatWidget } from '../components/ChatWidget';
-import { ThemeToggle } from '../components/ThemeToggle';
 import { NotificationBell } from '../components/NotificationBell';
 import './DashboardLayout.css';
 
 export function DashboardLayout({ children }) {
   const location = useLocation();
-  const applications = useAppStore((state) => state.applications);
   const notifications = useAppStore((state) => state.notifications);
   const businessProfile = useAppStore((state) => state.businessProfile);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   // Calculate unread notifications
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -64,7 +61,6 @@ export function DashboardLayout({ children }) {
                 key={item.path}
                 to={item.path}
                 className={`sidebar-link ${isActive ? 'active' : ''}`}
-                onClick={() => setSidebarOpen(false)}
               >
                 <Icon className="sidebar-icon" size={20} />
                 <span>{item.label}</span>
@@ -83,19 +79,18 @@ export function DashboardLayout({ children }) {
             <Search size={20} color="var(--text-muted)" />
             <input type="text" placeholder="Search approvals, schemes, etc." />
           </div>
-          <div className="header-actions">
+          <div className="topbar-actions">
             <LanguageToggle />
-            <ThemeToggle />
             <NotificationBell count={unreadCount} notifications={notifications} />
             <div className="user-profile">
               <img 
                 src={businessProfile.logoUrl}
                 alt="Profile" 
-                className="profile-img"
+                className="user-avatar"
               />
-              <div className="profile-info">
-                <span className="profile-name">{businessProfile.companyName}</span>
-                <span className="profile-role">Entrepreneur</span>
+              <div className="user-info">
+                <span className="user-name">{businessProfile.companyName}</span>
+                <span className="user-org">Entrepreneur</span>
               </div>
             </div>
           </div>

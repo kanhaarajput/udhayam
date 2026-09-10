@@ -113,7 +113,7 @@ export function ApiStatus() {
           </div>
           <CardContent className="status-card-content p-0">
             <div className="services-list">
-              {API_SERVICES.map((service, index) => {
+              {API_SERVICES.map((service) => {
                 const timeline = generateTimeline(service.status);
                 
                 return (

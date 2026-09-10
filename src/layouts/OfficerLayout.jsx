@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LayoutDashboard, FileText, CheckSquare, MessageSquare, BarChart, Bell, Search, User } from 'lucide-react';
-import { ThemeToggle } from '../components/ThemeToggle';
 import { NotificationBell } from '../components/NotificationBell';
 import './OfficerLayout.css';
 
@@ -51,7 +50,6 @@ export function OfficerLayout({ children }) {
             <input type="text" placeholder="Search Application ID, Entrepreneur Name..." />
           </div>
           <div className="topbar-actions">
-            <ThemeToggle />
             <NotificationBell />
             <div className="user-profile">
               <img src="https://ui-avatars.com/api/?name=Officer+Sharma&background=16a34a&color=fff" alt="Profile" className="profile-img" />

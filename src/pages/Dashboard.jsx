@@ -39,7 +39,7 @@ export function Dashboard() {
           </div>
           <div style={{ display: 'flex', gap: 'var(--spacing-md)' }}>
             <Button variant="outline" onClick={() => setRunTour(true)}><Play size={18} /> Start Tour</Button>
-            <Button variant="primary" onClick={() => navigate('/profile')}><Plus size={18} /> {t.newProject}</Button>
+            <Button variant="primary" onClick={() => navigate('/submit-application')}><Plus size={18} /> {t.newProject}</Button>
           </div>
         </div>
 
