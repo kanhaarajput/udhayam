@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/Button';
 import { 
-  CheckCircle2, Bot, FolderLock, ShieldAlert, ArrowRight, 
-  ChevronDown, Check, Star, Zap, Users, BarChart3
+  ArrowRight, ShieldCheck, Clock, Brain, Activity, Shield, Link as LinkIcon,
+  CheckCircle2, Bot, FolderLock, ShieldAlert, ChevronDown, Check, Star, Zap, Users, BarChart3
 } from 'lucide-react';
 import './LandingPage.css';
 
@@ -34,17 +34,22 @@ export function LandingPage() {
       <nav className={`landing-nav ${scrolled ? 'nav-scrolled' : ''}`}>
         <div className="nav-container">
           <div className="nav-brand">
-            <div className="brand-logo">U</div>
-            <span className="brand-text">UdyamOne</span>
+            <Shield className="gov-shield" size={24} />
+            <div className="brand-text-col">
+              <span className="brand-text">UdyamOne</span>
+              <span className="brand-subtext">Business Compliance Portal</span>
+            </div>
           </div>
           <div className="nav-links">
-            <a href="#features">Features</a>
-            <a href="#faq">FAQ</a>
+            <a href="#platform" className="nav-active">Platform</a>
           </div>
           <div className="nav-actions">
-            <button className="nav-login" onClick={() => navigate('/login')}>Log In</button>
-            <Button variant="primary" onClick={() => navigate('/dashboard')}>
-              Start Free Trial
+            <div className="gov-branding">
+              <span className="gov-main">Government of India</span>
+              <span className="gov-sub">Ministry of MSME</span>
+            </div>
+            <Button variant="primary" className="btn-login-teal" onClick={() => navigate('/login')}>
+              Login <ArrowRight size={16} style={{ marginLeft: '4px' }}/>
             </Button>
           </div>
         </div>
@@ -52,46 +57,39 @@ export function LandingPage() {
 
       {/* Hero Section */}
       <section className="hero-section">
-        <div className="hero-bg-glow"></div>
         <div className="hero-container">
-          
-          <div className="hero-badge fade-in-up">
-            <Star size={14} className="text-warning"/> 
-            <span>Trusted by 5,000+ Indian Businesses</span>
-          </div>
-
-          <h1 className="hero-title fade-in-up" style={{ animationDelay: '0.1s' }}>
-            Simplify Government Compliance.<br/>
-            <span className="gradient-text">Scale Your Business.</span>
-          </h1>
-          
-          <p className="hero-subtitle fade-in-up" style={{ animationDelay: '0.2s' }}>
-            The ultimate enterprise platform to manage approvals, track compliance, securely store documents, and interface with the Government of India.
-          </p>
-          
-          <div className="hero-cta-group fade-in-up" style={{ animationDelay: '0.3s' }}>
-            <Button variant="primary" size="lg" className="cta-btn-primary" onClick={() => navigate('/dashboard')}>
-              Launch Dashboard <ArrowRight size={18} style={{ marginLeft: '8px' }}/>
-            </Button>
-            <Button variant="secondary" size="lg" className="cta-btn-outline" onClick={() => document.getElementById('pricing').scrollIntoView({ behavior: 'smooth' })}>
-              View Pricing
-            </Button>
-          </div>
-
-          <div className="hero-floating-elements fade-in-up" style={{ animationDelay: '0.5s' }}>
-            {/* Mock UI Elements floating around */}
-            <div className="float-card float-1">
-              <CheckCircle2 size={20} className="text-success"/>
-              <div className="fc-text">
-                <strong>Trade License</strong>
-                <span>Approved • Just now</span>
-              </div>
+          <div className="hero-content">
+            <div className="hero-badge fade-in-up">
+              <span className="badge-pill">IN</span> 
+              <span>Towards a Compliant, Thriving India</span>
             </div>
-            <div className="float-card float-2">
-              <ShieldAlert size={20} className="text-warning"/>
-              <div className="fc-text">
-                <strong>GST Filing Due</strong>
-                <span>In 3 days</span>
+
+            <h1 className="hero-title fade-in-up" style={{ animationDelay: '0.1s' }}>
+              Intelligent Business<br/>
+              Registration &amp; <span className="text-teal">Compliance</span><br/>
+              <span className="text-teal">Platform</span>
+            </h1>
+            
+            <p className="hero-subtitle fade-in-up" style={{ animationDelay: '0.2s' }}>
+              UdyamOne unifies enterprise registration, real-time analytics, compliance monitoring, and data interoperability in one secure, AI-enabled platform — supporting MSMEs, enterprises, and regulators for a thriving India.
+            </p>
+            
+            <div className="hero-features-row fade-in-up" style={{ animationDelay: '0.3s' }}>
+              <div className="feature-circle">
+                <div className="fc-icon"><Clock size={24} /></div>
+                <span>Real-time</span>
+              </div>
+              <div className="feature-circle">
+                <div className="fc-icon fc-green"><ShieldCheck size={24} /></div>
+                <span>Compliance</span>
+              </div>
+              <div className="feature-circle">
+                <div className="fc-icon fc-purple"><Brain size={24} /></div>
+                <span>AI-driven</span>
+              </div>
+              <div className="feature-circle">
+                <div className="fc-icon fc-orange"><LinkIcon size={24} /></div>
+                <span>End-to-End</span>
               </div>
             </div>
           </div>
