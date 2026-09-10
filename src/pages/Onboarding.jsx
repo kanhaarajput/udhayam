@@ -201,7 +201,11 @@ export function Onboarding() {
             <Button variant="outline" onClick={handleBack} className="btn-back">
               <ChevronLeft size={16} style={{ marginRight: '4px' }} /> Back
             </Button>
-          ) : <div></div>}
+          ) : (
+            <Button variant="outline" onClick={() => navigate('/')} className="btn-back">
+              <ChevronLeft size={16} style={{ marginRight: '4px' }} /> Back
+            </Button>
+          )}
           
           <Button variant="primary" onClick={handleNext} className="btn-next">
             {step === 3 ? 'Launch Dashboard' : 'Continue'} 

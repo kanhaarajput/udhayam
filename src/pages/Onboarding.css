@@ -263,7 +263,7 @@
 .onboarding-footer {
   width: 100%;
   max-width: 500px;
-  margin-top: auto;
+  margin-top: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
