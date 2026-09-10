@@ -1,0 +1,342 @@
+.vault-container {
+  display: flex;
+  height: calc(100vh - 120px);
+  background-color: var(--surface-color);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.vault-sidebar {
+  width: 260px;
+  background-color: var(--bg-color);
+  border-right: 1px solid var(--border-color);
+  padding: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
+}
+
+.vault-sidebar-title {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-md);
+  font-weight: 600;
+}
+
+.vault-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vault-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+}
+
+.vault-nav-item:hover {
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+}
+
+.vault-nav-item.active {
+  background-color: var(--primary-100);
+  color: var(--primary-800);
+}
+
+.vault-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+}
+
+.vault-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.vault-toolbar {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+.vault-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  width: 240px;
+}
+.vault-search input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  color: var(--text-primary);
+}
+
+.view-toggle {
+  display: flex;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.view-toggle button {
+  padding: 8px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.view-toggle button.active {
+  background-color: var(--primary-100);
+  color: var(--primary-700);
+}
+
+.vault-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.file-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.file-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl) var(--spacing-md);
+  text-align: center;
+}
+
+.file-card-icon {
+  margin-bottom: var(--spacing-md);
+}
+
+.file-name {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  margin: 0 0 4px 0;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-meta {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.file-actions-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.file-card:hover .file-actions-overlay {
+  opacity: 1;
+}
+
+.action-btn {
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.action-btn:hover {
+  transform: scale(1.1);
+}
+.action-btn.delete {
+  color: var(--error-600);
+}
+
+.vault-list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.vault-list th {
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-size: var(--text-sm);
+}
+
+.vault-list td {
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+}
+.vault-list tr:hover {
+  background-color: var(--bg-color);
+}
+
+.action-btn-sm {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.vault-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: var(--text-secondary);
+}
+.vault-empty h3 {
+  margin: 16px 0 8px;
+  color: var(--text-primary);
+}
+
+/* Modal Overlay */
+.vault-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.vault-modal {
+  background: var(--surface-color);
+  border-radius: var(--radius-lg);
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.vault-modal-header {
+  padding: 20px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.vault-modal-header h3 {
+  margin: 0;
+}
+.close-btn {
+  background: transparent;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.vault-modal-body {
+  padding: 32px;
+}
+
+.drag-drop-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 48px;
+  text-align: center;
+  background-color: var(--bg-color);
+  transition: all 0.2s;
+}
+
+.drag-drop-zone.drag-over {
+  border-color: var(--primary-500);
+  background-color: var(--primary-50);
+}
+
+.drag-drop-zone h4 {
+  margin: 0 0 8px 0;
+  font-size: var(--text-md);
+}
+.drag-drop-zone p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.upload-progress-container {
+  text-align: center;
+  padding: 32px 0;
+}
+
+.progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: 4px;
+  margin-top: 16px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--primary-600);
+  transition: width 0.2s ease-out;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--border-color);
+  border-top-color: var(--primary-600);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

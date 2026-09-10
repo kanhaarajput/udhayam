@@ -1,0 +1,138 @@
+.upload-page {
+  display: flex;
+  flex-direction: column;
+  max-width: 1000px;
+}
+
+.upload-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: var(--text-lg);
+  color: var(--primary-800);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.doc-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.doc-item:last-child {
+  border-bottom: none;
+}
+
+.doc-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.doc-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-50);
+  color: var(--primary-600);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.doc-name {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--primary-800);
+  margin: 0 0 2px 0;
+}
+
+.doc-meta {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.doc-status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.doc-status.uploaded {
+  background-color: var(--success-bg);
+  color: var(--success-text);
+}
+
+.btn-upload {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+/* Guidelines */
+.guidelines-card {
+  background-color: var(--primary-50);
+  border: 1px solid var(--primary-100);
+}
+
+.guidelines-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+}
+
+.guidelines-header h3 {
+  margin: 0;
+  color: var(--primary-800);
+  font-size: var(--text-md);
+}
+
+.guidelines-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.guidelines-list li {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+  position: relative;
+  padding-left: var(--spacing-lg);
+}
+
+.guidelines-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-600);
+  font-size: var(--text-lg);
+  line-height: 1;
+  top: 0px;
+}
+
+.guidelines-list strong {
+  color: var(--primary-800);
+}
+
+@media (max-width: 768px) {
+  .upload-grid {
+    grid-template-columns: 1fr;
+  }
+}

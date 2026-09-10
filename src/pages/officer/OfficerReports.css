@@ -1,0 +1,96 @@
+.reports-dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  height: 100%;
+}
+
+.reports-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.reports-actions {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.charts-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  flex: 1;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-color);
+}
+
+.chart-card-header {
+  padding: var(--spacing-lg) var(--spacing-xl) 0;
+}
+
+.chart-card-header h3 {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--primary-800);
+}
+
+.area-chart-card {
+  height: 380px;
+}
+
+.charts-bottom-row {
+  display: flex;
+  gap: var(--spacing-xl);
+  height: 320px;
+}
+
+.half-chart {
+  flex: 1;
+  min-width: 0;
+}
+
+.chart-container {
+  flex: 1;
+  padding: var(--spacing-md) var(--spacing-xl) var(--spacing-xl);
+  min-height: 0; /* Important for ResponsiveContainer */
+}
+
+/* Custom Recharts Overrides for Dark Mode Support */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--border-color);
+}
+.recharts-text {
+  fill: var(--text-muted);
+}
+
+/* Print Styles for PDF Export */
+@media print {
+  .dashboard-sidebar, .officer-sidebar, .reports-actions, .command-palette {
+    display: none !important;
+  }
+  
+  .dashboard-main, .officer-main {
+    margin-left: 0 !important;
+    padding: 0 !important;
+  }
+  
+  .charts-grid {
+    gap: 20px;
+  }
+  
+  .chart-card {
+    break-inside: avoid;
+    border: 1px solid #ddd;
+    box-shadow: none;
+  }
+  
+  .recharts-text {
+    fill: #333 !important;
+  }
+}

@@ -1,0 +1,261 @@
+.verify-page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+}
+
+.split-screen-ui {
+  display: flex;
+  gap: var(--spacing-xl);
+  flex: 1;
+  min-height: 0; /* Important for flex-child scrolling */
+}
+
+.viewer-pane {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.viewer-toolbar {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--primary-900);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.viewer-content {
+  flex: 1;
+  background-color: var(--bg-color);
+  padding: var(--spacing-xl);
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Essential for absolute positioning pins */
+}
+
+/* Document Container needs relative positioning for precise pin placement */
+.document-image-container {
+  position: relative;
+  display: inline-block; /* Hugs the image tightly */
+  box-shadow: var(--shadow-md);
+  cursor: crosshair;
+}
+
+.document-image-container.annotation-mode {
+  outline: 4px dashed var(--error-color);
+  outline-offset: 4px;
+  cursor: crosshair;
+}
+
+.document-image-container.view-mode {
+  cursor: default;
+}
+
+.verification-image {
+  max-width: 100%;
+  max-height: 800px;
+  object-fit: contain;
+  display: block; /* Removes bottom space */
+}
+
+/* Annotation Pins */
+.annotation-pin {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  background-color: var(--error-color);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: var(--text-sm);
+  transform: translate(-50%, -50%); /* Center perfectly on click point */
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(220, 38, 38, 0.4);
+  border: 2px solid white;
+  z-index: 10;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.annotation-pin:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.annotation-pin.active {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.3);
+}
+
+/* Annotation Input Popover */
+.annotation-input-popover {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 12px;
+  background-color: var(--surface-color);
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  padding: var(--spacing-sm);
+  width: 260px;
+  z-index: 20;
+  border: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.annotation-input-popover textarea {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  resize: none;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  outline: none;
+}
+.annotation-input-popover textarea:focus {
+  border-color: var(--primary-500);
+}
+
+.annotation-input-popover .popover-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Mode Banner */
+.mode-banner {
+  background-color: var(--error-50);
+  color: var(--error-700);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-bottom: 1px solid var(--error-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+/* Annotation List in Sidebar */
+.annotations-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+}
+
+.annotation-list-item {
+  display: flex;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background-color: var(--error-50);
+  border: 1px solid var(--error-200);
+  border-radius: var(--radius-md);
+  align-items: flex-start;
+}
+
+.annotation-list-item .badge-number {
+  background-color: var(--error-600);
+  color: white;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.annotation-list-item p {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--error-800);
+  line-height: 1.4;
+}
+
+.annotation-list-item .delete-btn {
+  background: none;
+  border: none;
+  color: var(--error-500);
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+.annotation-list-item .delete-btn:hover {
+  color: var(--error-700);
+}
+
+.action-pane {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.check-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  font-size: var(--text-sm);
+  color: var(--primary-800);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.check-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-600);
+  cursor: pointer;
+}
+
+.verification-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+}
+
+.verification-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-xl);
+  background-color: var(--success-bg);
+  border: 1px solid #86efac;
+  border-radius: var(--radius-md);
+  color: var(--success-text);
+  font-weight: 600;
+  text-align: center;
+}
+
+.verification-success p {
+  margin: 0;
+}

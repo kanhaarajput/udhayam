@@ -1,0 +1,164 @@
+.officer-layout {
+  display: flex;
+  height: 100vh;
+  background-color: var(--bg-color);
+  overflow: hidden;
+}
+
+.officer-sidebar {
+  width: 260px;
+  background-color: var(--primary-900);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.officer-sidebar .sidebar-brand {
+  padding: var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.officer-sidebar .sidebar-brand h2 {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  margin: 0;
+}
+
+.officer-sidebar .sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-md);
+  gap: var(--spacing-xs);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.officer-sidebar .nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  color: var(--primary-200);
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+  font-weight: 500;
+}
+
+.officer-sidebar .nav-item:hover {
+  background-color: rgba(255,255,255,0.05);
+  color: white;
+}
+
+.officer-sidebar .nav-item.active {
+  background-color: var(--primary-800);
+  color: white;
+  border-left: 4px solid var(--accent-500);
+}
+
+.officer-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.officer-topbar {
+  height: 70px;
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-xl);
+  flex-shrink: 0;
+}
+
+.officer-topbar .search-container {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-color);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  width: 350px;
+}
+
+.officer-topbar .search-icon {
+  color: var(--text-muted);
+  margin-right: var(--spacing-sm);
+}
+
+.officer-topbar .search-container input {
+  border: none;
+  background: transparent;
+  outline: none;
+  width: 100%;
+  font-size: var(--text-sm);
+}
+
+.officer-topbar .topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xl);
+}
+
+.officer-topbar .icon-btn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.officer-topbar .icon-btn .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background-color: var(--error-text);
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.officer-topbar .user-profile {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  cursor: pointer;
+}
+
+.officer-topbar .avatar {
+  width: 36px;
+  height: 36px;
+  background-color: var(--primary-100);
+  color: var(--primary-600);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.officer-topbar .user-name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  color: var(--primary-800);
+}
+
+.officer-main .content-area {
+  flex: 1;
+  padding: var(--spacing-2xl);
+  overflow-y: auto;
+}

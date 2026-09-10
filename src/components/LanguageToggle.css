@@ -1,0 +1,31 @@
+.language-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--primary-50);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-color);
+  transition: all 0.2s ease;
+}
+
+.language-toggle:hover {
+  background-color: var(--primary-100);
+}
+
+.language-select {
+  background: transparent;
+  border: none;
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  padding-right: 4px;
+}
+
+.language-select option {
+  color: #000; /* Ensure text is readable in light/dark dropdowns */
+  background-color: #fff;
+}

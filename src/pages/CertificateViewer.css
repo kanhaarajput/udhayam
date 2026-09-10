@@ -1,0 +1,157 @@
+.certificate-page {
+  min-height: 100vh;
+  background-color: var(--primary-50);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--spacing-xl);
+}
+
+.cert-actions {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-xl);
+}
+
+.certificate-container {
+  width: 100%;
+  max-width: 900px;
+  background-color: white; /* Certificates must be white, even in dark mode */
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-lg);
+  color: #111; /* Hardcode text color for printing */
+}
+
+.certificate-border {
+  border: 12px double #1e3a8a; /* Deep blue formal border */
+  padding: var(--spacing-2xl);
+  height: 100%;
+}
+
+.certificate-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.cert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: 2px solid #1e3a8a;
+  padding-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.cert-gov-text h2 {
+  color: #1e3a8a;
+  margin: 0;
+  font-size: var(--text-2xl);
+  font-family: 'Times New Roman', Times, serif;
+}
+.cert-gov-text p {
+  color: #444;
+  margin: 4px 0;
+  font-size: var(--text-md);
+}
+.cert-gov-text h3 {
+  color: #1e3a8a;
+  margin: 4px 0 0 0;
+  font-size: var(--text-xl);
+  letter-spacing: 2px;
+}
+
+.cert-title-section {
+  margin: var(--spacing-2xl) 0;
+}
+.cert-title-section h1 {
+  font-family: 'Times New Roman', Times, serif;
+  color: #b91c1c; /* Deep red for formal certificate title */
+  font-size: var(--text-4xl);
+  margin: 0 0 var(--spacing-md) 0;
+}
+.cert-id {
+  font-size: var(--text-lg);
+  color: #333;
+}
+
+.cert-body {
+  max-width: 700px;
+  line-height: 1.8;
+  font-size: var(--text-lg);
+}
+.cert-body h2 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: var(--text-3xl);
+  color: #1e3a8a;
+  margin: var(--spacing-md) 0;
+  border-bottom: 1px dashed #ccc;
+  display: inline-block;
+  padding: 0 var(--spacing-xl);
+}
+.cert-body h3 {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: var(--text-2xl);
+  color: #166534; /* Success green */
+  margin: var(--spacing-md) 0;
+}
+
+.cert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  margin-top: var(--spacing-3xl);
+  padding-top: var(--spacing-2xl);
+}
+
+.cert-qr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.qr-placeholder {
+  width: 100px;
+  height: 100px;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  color: #64748b;
+  margin-bottom: var(--spacing-xs);
+}
+
+.cert-signature {
+  text-align: center;
+}
+.signature-line {
+  width: 200px;
+  border-bottom: 1px solid #333;
+  margin-bottom: var(--spacing-xs);
+  height: 40px; /* Space for the signature image */
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .certificate-page {
+    background-color: white !important;
+    padding: 0 !important;
+  }
+  .certificate-container {
+    box-shadow: none !important;
+    max-width: none !important;
+    width: 100% !important;
+  }
+  @page {
+    size: A4 portrait;
+    margin: 1cm;
+  }
+}

@@ -1,0 +1,284 @@
+.team-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.team-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-sm);
+}
+
+.team-card {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.team-card-header {
+  padding: var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-card-header h3 {
+  margin: 0;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+}
+
+.header-desc {
+  margin: 4px 0 0 0;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.team-count {
+  background-color: var(--primary-50);
+  color: var(--primary-700);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+}
+[data-theme="dark"] .team-count {
+  background-color: rgba(13, 138, 188, 0.1);
+  color: var(--primary-300);
+}
+
+/* Directory Table */
+.table-responsive {
+  overflow-x: auto;
+}
+
+.team-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.team-table th {
+  text-align: left;
+  padding: 16px var(--spacing-xl);
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-muted);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--bg-color);
+}
+
+.team-table td {
+  padding: 16px var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color);
+  vertical-align: middle;
+}
+.team-table tr:last-child td { border-bottom: none; }
+.team-table tr:hover td { background-color: var(--bg-color); }
+
+.member-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-400), var(--primary-600));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.member-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-info strong {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+}
+
+.member-info span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+/* Role Badges */
+.role-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-owner { background-color: #3b82f615; color: #3b82f6; border: 1px solid #3b82f630; }
+.badge-admin { background-color: #8b5cf615; color: #8b5cf6; border: 1px solid #8b5cf630; }
+.badge-acc { background-color: #10b98115; color: #10b981; border: 1px solid #10b98130; }
+.badge-legal { background-color: #f59e0b15; color: #f59e0b; border: 1px solid #f59e0b30; }
+.badge-default { background-color: var(--bg-color); color: var(--text-secondary); border: 1px solid var(--border-color); }
+
+/* Status Badges */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-full);
+}
+.status-badge.active { background-color: var(--success-50); color: var(--success-600); }
+.status-badge.pending { background-color: var(--warning-50); color: var(--warning-600); }
+[data-theme="dark"] .status-badge.active { background-color: rgba(16, 185, 129, 0.1); color: var(--success-400); }
+[data-theme="dark"] .status-badge.pending { background-color: rgba(245, 158, 11, 0.1); color: var(--warning-400); }
+
+.last-active {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+
+.icon-btn-more {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+}
+.icon-btn-more:hover {
+  background-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* Permission Matrix */
+.permissions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.permissions-table th {
+  padding: 16px var(--spacing-xl);
+  border-bottom: 2px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: var(--text-sm);
+  background-color: var(--bg-color);
+}
+.permissions-table th:first-child { text-align: left; }
+
+.permissions-table td {
+  padding: 16px var(--spacing-xl);
+  border-bottom: 1px solid var(--border-color);
+}
+.permissions-table tr:last-child td { border-bottom: none; }
+.permissions-table tr:hover td { background-color: var(--bg-color); }
+
+.perm-feature {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.text-success { color: var(--success-500); }
+.text-muted { color: var(--border-color); }
+
+/* Invite Modal */
+.team-invite-modal {
+  max-width: 480px;
+  width: 100%;
+}
+
+.modal-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-group input, .form-group select {
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-group input:focus, .form-group select:focus {
+  border-color: var(--primary-500);
+}
+
+.role-explanation {
+  background-color: var(--primary-50);
+  border: 1px solid var(--primary-200);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  color: var(--primary-700);
+}
+[data-theme="dark"] .role-explanation {
+  background-color: rgba(13, 138, 188, 0.1);
+  border-color: rgba(13, 138, 188, 0.3);
+  color: var(--primary-300);
+}
+
+.role-explanation p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.mt-6 { margin-top: var(--spacing-xl); }
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.bounce-in {
+  animation: bounceIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.9); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@media (max-width: 768px) {
+  .team-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+}

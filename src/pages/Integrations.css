@@ -1,0 +1,202 @@
+.integrations-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.integrations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-xs);
+}
+
+.integrations-filters {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.filter-chip {
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.filter-chip:hover {
+  border-color: var(--primary-400);
+}
+
+.filter-chip.active {
+  background-color: var(--primary-600);
+  color: white;
+  border-color: var(--primary-600);
+}
+
+/* App Grid */
+.integrations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+.integration-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.2s, box-shadow 0.2s;
+  background-color: var(--surface-color);
+  border: 1px solid var(--border-color);
+}
+
+.integration-card:hover:not(.coming-soon) {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.connected-card {
+  border-color: var(--success-300);
+}
+[data-theme="dark"] .connected-card {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.integration-card-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: var(--spacing-xl);
+}
+
+.integration-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-lg);
+}
+
+.integration-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.connected-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background-color: var(--success-100);
+  color: var(--success-700);
+  padding: 6px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.integration-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.integration-category {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.integration-name {
+  margin: 0 0 8px 0;
+  font-size: var(--text-lg);
+  color: var(--text-primary);
+}
+
+.integration-desc {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-xl);
+}
+
+.integration-actions {
+  margin-top: auto;
+}
+
+.btn-disconnect {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-disconnect:hover {
+  background-color: var(--error-50);
+  color: var(--error-600);
+  border-color: var(--error-200);
+}
+[data-theme="dark"] .btn-disconnect:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+/* Mini Spinner */
+.spinner-mini {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.coming-soon {
+  background-color: var(--bg-color);
+  border: 1px dashed var(--border-color);
+  box-shadow: none;
+}
+
+.mt-4 {
+  margin-top: 16px;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
