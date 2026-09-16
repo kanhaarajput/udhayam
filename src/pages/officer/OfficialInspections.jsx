@@ -4,6 +4,7 @@ import { OfficerLayout } from '../../layouts/OfficerLayout';
 import { Card, CardContent } from '../../components/Card';
 import { Button } from '../../components/Button';
 import { Calendar, Clock, MapPin, UserCheck, CheckCircle2, AlertTriangle, Building2, Search, X, FileText } from 'lucide-react';
+import { BUNDLED_INSPECTION } from '../../data/mockData';
 import './OfficialInspections.css';
 
 const MOCK_INSPECTIONS = [
@@ -139,6 +140,36 @@ export function OfficialInspections() {
             <Calendar size={16} style={{ marginRight: '6px' }}/> Schedule New Inspection
           </Button>
         </div>
+
+        <Card className="bundled-ins-card" style={{ marginBottom: '24px', background: 'linear-gradient(to right, #f0f9ff, #e0f2fe)', border: '1px solid #bae6fd' }}>
+          <CardContent style={{ padding: '24px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '16px' }}>
+              <div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
+                  <span style={{ background: '#0284c7', color: 'white', padding: '4px 12px', borderRadius: '12px', fontSize: '12px', fontWeight: 'bold' }}>AI SUGGESTION</span>
+                  <h3 style={{ margin: 0, color: '#0f172a' }}>Bundled Inspection Available</h3>
+                </div>
+                <p style={{ margin: '0 0 16px 0', color: '#334155', fontSize: '15px' }}>
+                  <strong>{BUNDLED_INSPECTION.applicant}</strong> has overlapping inspection requirements.
+                </p>
+                <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#475569', fontSize: '14px' }}>
+                    <Building2 size={16} /> <span>{BUNDLED_INSPECTION.departments.join(' + ')}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#475569', fontSize: '14px' }}>
+                    <Calendar size={16} /> <span>Suggested: {BUNDLED_INSPECTION.suggestedDate}</span>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#059669', fontSize: '14px', fontWeight: '600' }}>
+                    <CheckCircle2 size={16} /> <span>{BUNDLED_INSPECTION.savingsInsight}</span>
+                  </div>
+                </div>
+              </div>
+              <Button variant="primary" onClick={() => toast.success('Bundled inspection scheduled successfully!')}>
+                Confirm Bundled Inspection
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         <div className="ins-filters">
           <div className="search-box">

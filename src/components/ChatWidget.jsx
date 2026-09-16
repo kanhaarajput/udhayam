@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MessageSquare, X, Send, Bot, Sparkles, ChevronRight } from 'lucide-react';
+import { MessageSquare, X, Send, Bot, Sparkles, ChevronRight, AlertTriangle } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
+import { RAG_RESPONSES } from '../data/mockData';
 import './ChatWidget.css';
 
 export function ChatWidget() {
@@ -19,7 +20,6 @@ export function ChatWidget() {
   
   // Calculate insights
   const pendingApps = applications.filter(a => a.status === 'In Progress').length;
-  // Hardcoded for demo, but could be dynamic
   const hasOverdueCompliance = true; 
 
   const scrollToBottom = () => {
@@ -32,10 +32,9 @@ export function ChatWidget() {
 
   useEffect(() => {
     if (isOpen && messages.length === 0) {
-      // Generate Context-Aware Greeting
       setIsTyping(true);
       setTimeout(() => {
-        let greetingText = `Hello ${profile.companyName}! I am Udyam AI, your enterprise copilot.`;
+        let greetingText = `Hello ${profile.companyName || 'Guest'}! I am Udyam AI, your enterprise copilot.`;
         
         let insights = [];
         if (pendingApps > 0) insights.push(`You currently have ${pendingApps} application(s) under review.`);
@@ -72,22 +71,51 @@ export function ChatWidget() {
     setInputText('');
     setIsTyping(true);
 
-    // Simulate AI thinking
     setTimeout(() => {
-      let aiResponse = { sender: 'ai', text: 'I can certainly help you with that. Would you like me to guide you to the relevant section?' };
+      let aiResponse = { 
+        sender: 'ai', 
+        text: 'I can help you with that — try asking about applicable approvals, department timelines, or document requirements.' 
+      };
       
       const query = newMsg.text.toLowerCase();
       
-      // Basic intent matching
-      if (query.includes('scheme') || query.includes('subsidy') || query.includes('loan')) {
-        aiResponse.text = "Based on your Private Limited status, you are eligible for several schemes including the ZED Certification Subsidy. Let's find the best match.";
-        aiResponse.actions = [{ label: 'Open Scheme Matcher', route: '/schemes' }];
-      } else if (query.includes('license') || query.includes('noc')) {
-        aiResponse.text = "You can track your existing NOC applications or apply for new ones in the Tracking dashboard.";
-        aiResponse.actions = [{ label: 'Go to Tracking', route: '/tracking' }];
-      } else if (query.includes('upload') || query.includes('document')) {
-        aiResponse.text = "All your official documents should be stored in the encrypted Document Vault.";
-        aiResponse.actions = [{ label: 'Open Vault', route: '/vault' }];
+      const hasApproval = query.includes('approval') || query.includes('approvals');
+      const hasFoodProcessing = query.includes('food processing');
+      const hasMIDC = query.includes('midc');
+      
+      const hasMPCB = query.includes('mpcb');
+      const hasConsent = query.includes('consent');
+      const hasDuration = query.includes('long') || query.includes('take') || query.includes('time') || query.includes('days');
+      
+      const hasReuse = query.includes('reuse') || query.includes('reused');
+      const hasDoc = query.includes('document') || query.includes('documents');
+      
+      if (hasApproval && (hasFoodProcessing || hasMIDC)) {
+        const rag = RAG_RESPONSES[0];
+        aiResponse.text = rag.answer;
+        aiResponse.citation = rag.citation;
+      } else if (hasMPCB && hasConsent && hasDuration) {
+        const rag = RAG_RESPONSES[1];
+        aiResponse.text = rag.answer;
+        aiResponse.citation = rag.citation;
+      } else if (hasReuse && hasDoc) {
+        const rag = RAG_RESPONSES[2];
+        aiResponse.text = rag.answer;
+        aiResponse.citation = rag.citation;
+        aiResponse.isFlagged = rag.flagged;
+        aiResponse.flagReason = rag.flagReason;
+      } else {
+        // Fallbacks
+        if (query.includes('scheme') || query.includes('subsidy') || query.includes('loan')) {
+          aiResponse.text = "Based on your Private Limited status, you are eligible for several schemes including the ZED Certification Subsidy. Let's find the best match.";
+          aiResponse.actions = [{ label: 'Open Scheme Matcher', route: '/schemes' }];
+        } else if (query.includes('license') || query.includes('noc')) {
+          aiResponse.text = "You can track your existing NOC applications or apply for new ones in the Tracking dashboard.";
+          aiResponse.actions = [{ label: 'Go to Tracking', route: '/tracking' }];
+        } else if (query.includes('upload') || query.includes('document')) {
+          aiResponse.text = "All your official documents should be stored in the encrypted Document Vault.";
+          aiResponse.actions = [{ label: 'Open Vault', route: '/upload-documents' }]; // Fixed /vault route
+        }
       }
 
       setMessages(prev => [...prev, aiResponse]);
@@ -125,8 +153,21 @@ export function ChatWidget() {
           {messages.map((msg, index) => (
             <div key={index} className={`chat-bubble-wrapper ${msg.sender}`}>
               {msg.sender === 'ai' && (
-                <div className="chat-bubble ai">
-                  <div className="ai-text">{msg.text}</div>
+                <div className={`chat-bubble ai ${msg.isFlagged ? 'flagged-response' : ''}`}>
+                  <div className="ai-text" style={{ whiteSpace: 'pre-line' }}>{msg.text}</div>
+                  
+                  {msg.citation && (
+                    <div className="ai-citation">
+                      {msg.citation}
+                    </div>
+                  )}
+
+                  {msg.isFlagged && (
+                    <div className="ai-flag-reason">
+                      <AlertTriangle size={14} style={{ flexShrink: 0 }} />
+                      <span>{msg.flagReason}</span>
+                    </div>
+                  )}
                   
                   {msg.insights && msg.insights.length > 0 && (
                     <div className="ai-insights">

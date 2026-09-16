@@ -324,3 +324,45 @@
     border-radius: 0;
   }
 }
+
+/* AI Citations & Flagged Responses */
+.ai-citation {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--border-color);
+  font-style: italic;
+}
+
+.flagged-response {
+  background-color: var(--warning-50) !important;
+  border-color: var(--warning-200) !important;
+  color: var(--warning-800) !important;
+}
+[data-theme="dark"] .flagged-response {
+  background-color: rgba(245, 158, 11, 0.1) !important;
+  border-color: var(--warning-800) !important;
+  color: var(--warning-200) !important;
+}
+
+.flagged-response .ai-citation {
+  border-top-color: var(--warning-300);
+}
+
+.ai-flag-reason {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--error-600);
+  background-color: var(--error-50);
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+[data-theme="dark"] .ai-flag-reason {
+  color: var(--error-300);
+  background-color: rgba(239, 68, 68, 0.15);
+}

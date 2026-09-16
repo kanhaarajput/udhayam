@@ -112,7 +112,6 @@ export function ComplianceCalendar() {
             </Card>
           ))}
         </div>
-        </div>
 
         {/* File Modal */}
         {showFileModal && selectedItem && (

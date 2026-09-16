@@ -34,7 +34,6 @@ import { ComplianceCalendar } from './pages/ComplianceCalendar';
 import { ExploreSchemes } from './pages/ExploreSchemes';
 
 import { CommandPalette } from './components/CommandPalette';
-import { AIAssistant } from './components/AIAssistant';
 import { Toaster } from 'react-hot-toast';
 import { useAppStore } from './store/useAppStore';
 
@@ -56,7 +55,6 @@ function App() {
         }
       }} />
       <CommandPalette />
-      <AIAssistant />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<Login />} />

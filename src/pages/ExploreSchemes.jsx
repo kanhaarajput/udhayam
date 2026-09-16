@@ -123,7 +123,6 @@ export function ExploreSchemes() {
             </CardContent>
           </Card>
         </div>
-        </div>
 
         {/* Apply Modal */}
         {showApplyModal && selectedScheme && (

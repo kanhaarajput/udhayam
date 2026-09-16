@@ -277,11 +277,12 @@ export function Helpdesk() {
         <div className="modal-overlay">
           <div className="modal-content fade-in-scale" style={{ maxWidth: '600px' }}>
             <div className="modal-header">
-              <h3>Create New Support Ticket</h3>
-              <button className="close-btn" onClick={() => setIsModalOpen(false)}>×</button>
+              <h2>Create New Support Ticket</h2>
+              <button className="btn-icon" onClick={() => setIsModalOpen(false)}><X size={20} /></button>
             </div>
-            <form onSubmit={handleCreateTicket} className="modal-body">
-              <div className="form-group">
+            <form onSubmit={handleCreateTicket}>
+              <div className="modal-body" style={{ padding: '24px' }}>
+                <div className="form-group">
                 <label>Category</label>
                 <select 
                   className="form-input" 
@@ -316,7 +317,8 @@ export function Helpdesk() {
                   required
                 />
               </div>
-              <div className="modal-actions" style={{ justifyContent: 'flex-end', marginTop: '24px' }}>
+              </div>
+              <div className="modal-actions" style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'flex-end', gap: '12px' }}>
                 <Button variant="outline" onClick={() => setIsModalOpen(false)} type="button">Cancel</Button>
                 <Button variant="primary" type="submit">Submit Ticket</Button>
               </div>

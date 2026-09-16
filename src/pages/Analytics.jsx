@@ -2,28 +2,16 @@ import React from 'react';
 import { AdminLayout } from '../layouts/AdminLayout';
 import { Card, CardContent } from '../components/Card';
 import { 
-  BarChart3, Clock, AlertTriangle, TrendingDown, TrendingUp, CheckCircle2, Shield
+  BarChart3, Clock, AlertTriangle, TrendingDown, TrendingUp, CheckCircle2,
 } from 'lucide-react';
+import { ANALYTICS_DATA } from '../data/mockData';
 import './Analytics.css';
 
-// Hardcoded Data
-const DEPARTMENTS = [
-  { name: 'FSSAI (Food Safety)', avgTime: 12, target: 15, applications: 1240 },
-  { name: 'MPCB (Pollution)', avgTime: 28, target: 21, applications: 856 },
-  { name: 'Fire Department', avgTime: 45, target: 30, applications: 432 },
-  { name: 'Labour Dept', avgTime: 8, target: 14, applications: 2100 },
-  { name: 'MIDC', avgTime: 18, target: 21, applications: 654 }
-];
-
-const BOTTLENECKS = [
-  { step: 'Document Verification', dept: 'Fire Department', impact: 'High', delay: '+15 days', status: 'critical' },
-  { step: 'Site Inspection', dept: 'MPCB (Pollution)', impact: 'High', delay: '+7 days', status: 'critical' },
-  { step: 'Payment Confirmation', dept: 'Cross-Department', impact: 'Medium', delay: '+2 days', status: 'warning' },
-  { step: 'Final Signature', dept: 'FSSAI (Food Safety)', impact: 'Low', delay: '+1 day', status: 'stable' },
-];
-
 export function Analytics() {
-  const maxTime = Math.max(...DEPARTMENTS.map(d => Math.max(d.avgTime, d.target)));
+  const maxTime = Math.max(...ANALYTICS_DATA.approvalTimes.map(d => Math.max(d.avgDays, d.target)));
+  
+  // Find max monthly application value for scaling the simple CSS bar chart
+  const maxMonthly = Math.max(...ANALYTICS_DATA.monthlyApplications.flatMap(m => [m.received, m.processed]));
 
   return (
     <AdminLayout>
@@ -71,6 +59,28 @@ export function Analytics() {
         </div>
 
         <div className="analytics-grid">
+          {/* Chart: Monthly Applications */}
+          <Card className="analytics-chart-card">
+            <div className="chart-header">
+              <h3>Monthly Applications Volume</h3>
+              <span className="chart-legend">
+                <span className="legend-item"><span className="legend-box" style={{ background: '#94a3b8' }}></span> Received</span>
+                <span className="legend-item"><span className="legend-box" style={{ background: '#0ea5e9' }}></span> Processed</span>
+              </span>
+            </div>
+            <CardContent className="chart-content" style={{ display: 'flex', alignItems: 'flex-end', gap: '16px', height: '200px', paddingTop: '40px' }}>
+              {ANALYTICS_DATA.monthlyApplications.map((data, idx) => (
+                <div key={idx} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' }}>
+                  <div style={{ display: 'flex', gap: '4px', alignItems: 'flex-end', height: '100%', width: '100%', justifyContent: 'center' }}>
+                    <div style={{ width: '40%', height: `${(data.received / maxMonthly) * 100}%`, background: '#94a3b8', borderRadius: '4px 4px 0 0', position: 'relative' }} title={`Received: ${data.received}`}></div>
+                    <div style={{ width: '40%', height: `${(data.processed / maxMonthly) * 100}%`, background: '#0ea5e9', borderRadius: '4px 4px 0 0', position: 'relative' }} title={`Processed: ${data.processed}`}></div>
+                  </div>
+                  <span style={{ fontSize: '12px', color: '#64748b', marginTop: '8px' }}>{data.month}</span>
+                </div>
+              ))}
+            </CardContent>
+          </Card>
+
           {/* Chart: Avg Approval Time per Dept */}
           <Card className="analytics-chart-card">
             <div className="chart-header">
@@ -82,19 +92,19 @@ export function Analytics() {
             </div>
             <CardContent className="chart-content">
               <div className="bar-chart-horizontal">
-                {DEPARTMENTS.map((dept, idx) => {
-                  const isBreaching = dept.avgTime > dept.target;
+                {ANALYTICS_DATA.approvalTimes.map((dept, idx) => {
+                  const isBreaching = dept.avgDays > dept.target;
                   return (
                     <div key={idx} className="bar-row">
-                      <div className="bar-label">{dept.name}</div>
+                      <div className="bar-label">{dept.department}</div>
                       <div className="bar-tracks">
                         {/* Actual Bar */}
                         <div className="track-group">
                           <div 
                             className={`bar-fill-actual ${isBreaching ? 'breaching' : ''}`}
-                            style={{ width: `${(dept.avgTime / maxTime) * 100}%` }}
+                            style={{ width: `${(dept.avgDays / maxTime) * 100}%` }}
                           >
-                            <span>{dept.avgTime}d</span>
+                            <span>{dept.avgDays}d</span>
                           </div>
                         </div>
                         {/* Target Bar */}
@@ -113,24 +123,24 @@ export function Analytics() {
           </Card>
 
           {/* Bottlenecks Table */}
-          <Card className="bottlenecks-card">
+          <Card className="bottlenecks-card" style={{ gridColumn: '1 / -1' }}>
             <div className="chart-header">
               <h3><AlertTriangle size={18} style={{ marginRight: '8px', color: '#ef4444' }}/> System Bottlenecks</h3>
             </div>
             <div className="bottlenecks-table">
               <div className="bt-header">
-                <span>Process Step</span>
                 <span>Department</span>
+                <span>Pending Approvals</span>
+                <span>Overdue Approvals</span>
                 <span>Avg Delay</span>
-                <span>Impact</span>
               </div>
-              {BOTTLENECKS.map((bn, idx) => (
-                <div key={idx} className={`bt-row status-${bn.status}`}>
-                  <span className="bt-step">{bn.step}</span>
-                  <span className="bt-dept">{bn.dept}</span>
-                  <span className="bt-delay">{bn.delay}</span>
+              {ANALYTICS_DATA.bottlenecks.map((bn, idx) => (
+                <div key={idx} className={`bt-row status-${bn.avgDelay > 10 ? 'critical' : bn.avgDelay > 5 ? 'warning' : 'stable'}`}>
+                  <span className="bt-step">{bn.department}</span>
+                  <span className="bt-dept">{bn.pending} pending</span>
+                  <span className="bt-delay" style={{ color: bn.overdue > 0 ? '#ef4444' : 'inherit' }}>{bn.overdue} overdue</span>
                   <span className="bt-impact">
-                    <span className="impact-badge">{bn.impact}</span>
+                    <span className="impact-badge">+{bn.avgDelay} days</span>
                   </span>
                 </div>
               ))}

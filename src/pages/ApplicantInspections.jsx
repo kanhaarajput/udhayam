@@ -131,7 +131,6 @@ export function ApplicantInspections() {
             </Card>
           ))}
         </div>
-        </div>
 
         {/* Reschedule Modal */}
         {showRescheduleModal && selectedIns && (
