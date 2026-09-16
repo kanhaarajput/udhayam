@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { 
   Settings, LayoutDashboard, User, Folder, Search, CheckSquare, 
-  FileText, ClipboardCheck, ShieldAlert, FileSignature, AlertCircle, LifeBuoy, FolderLock, Sun, Moon, Blocks, Activity, Users, Shield, BarChart3, Terminal, Mail, Zap, Gift
+  FileText, ClipboardCheck, ShieldAlert, FileSignature, AlertCircle, LifeBuoy, FolderLock, Sun, Moon, Blocks, Activity, Users, Shield, BarChart3, Terminal, Mail, Zap, Gift, Menu, X
 } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import { LanguageToggle } from '../components/LanguageToggle';
@@ -14,6 +14,7 @@ export function DashboardLayout({ children }) {
   const location = useLocation();
   const notifications = useAppStore((state) => state.notifications);
   const businessProfile = useAppStore((state) => state.businessProfile);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   
   // Calculate unread notifications
   const unreadCount = notifications.filter(n => !n.read).length;
@@ -32,8 +33,11 @@ export function DashboardLayout({ children }) {
 
   return (
     <div className="dashboard-layout">
+      {/* Mobile Sidebar Overlay */}
+      {sidebarOpen && <div className="sidebar-overlay" onClick={() => setSidebarOpen(false)}></div>}
+
       {/* Sidebar */}
-      <aside className="dashboard-sidebar tour-sidebar">
+      <aside className={`dashboard-sidebar tour-sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
           <Link to="/" className="sidebar-brand">
             <Settings size={28} color="var(--primary-700)" />
@@ -42,6 +46,9 @@ export function DashboardLayout({ children }) {
               <span className="brand-subtitle">GOVT OF MAHARASHTRA</span>
             </div>
           </Link>
+          <button className="mobile-sidebar-close" onClick={() => setSidebarOpen(false)}>
+            <X size={24} />
+          </button>
         </div>
         <nav className="sidebar-nav">
           {navItems.map((item) => {
@@ -66,9 +73,14 @@ export function DashboardLayout({ children }) {
       <div className="dashboard-main">
         {/* Topbar */}
         <header className="dashboard-topbar">
-          <div className="topbar-search tour-search">
-            <Search size={20} color="var(--text-muted)" />
-            <input type="text" placeholder="Search approvals, schemes, etc." />
+          <div className="topbar-left">
+            <button className="mobile-menu-btn" onClick={() => setSidebarOpen(true)}>
+              <Menu size={24} />
+            </button>
+            <div className="topbar-search tour-search">
+              <Search size={20} color="var(--text-muted)" />
+              <input type="text" placeholder="Search approvals, schemes, etc." />
+            </div>
           </div>
           <div className="topbar-actions">
             <LanguageToggle />

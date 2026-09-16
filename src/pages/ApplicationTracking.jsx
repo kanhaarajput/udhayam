@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 import { Card, CardContent } from '../components/Card';
 import { Button } from '../components/Button';
-import { FileText, Clock, CheckCircle2, MessageSquare, AlertTriangle, ChevronRight } from 'lucide-react';
+import { FileText, Clock, CheckCircle2, MessageSquare, AlertTriangle, ChevronRight, X, Download } from 'lucide-react';
 import { useAppStore } from '../store/useAppStore';
 import './ApplicationTracking.css';
 
 export function ApplicationTracking() {
+  const navigate = useNavigate();
   const checklist = useAppStore((state) => state.generatedChecklist);
+  const [selectedApp, setSelectedApp] = useState(null);
+
+  const handleDownload = () => {
+    toast.success('Certificate downloaded successfully!');
+  };
   
   // Simulated tracking data mapping
   const trackedApps = checklist.map((app, index) => ({
@@ -90,14 +98,16 @@ export function ApplicationTracking() {
 
                 <div className="tc-actions">
                   {app.queries > 0 ? (
-                    <Button variant="primary" size="sm">
+                    <Button variant="primary" size="sm" onClick={() => navigate('/helpdesk')}>
                       <MessageSquare size={16} style={{ marginRight: '6px' }} /> View & Reply to Query
                     </Button>
                   ) : (
-                    <Button variant="outline" size="sm">View Application Details</Button>
+                    <Button variant="outline" size="sm" onClick={() => setSelectedApp(app)}>View Application Details</Button>
                   )}
                   {app.status === 'approved' && (
-                    <Button variant="primary" size="sm">Download Certificate</Button>
+                    <Button variant="primary" size="sm" onClick={handleDownload}>
+                      <Download size={14} style={{ marginRight: '6px' }} /> Download Certificate
+                    </Button>
                   )}
                 </div>
               </CardContent>
@@ -110,6 +120,47 @@ export function ApplicationTracking() {
             </div>
           )}
         </div>
+
+        {/* Application Details Modal */}
+        {selectedApp && (
+          <div className="modal-overlay">
+            <div className="modal-content" style={{ maxWidth: '500px' }}>
+              <div className="modal-header">
+                <h2>Application Details</h2>
+                <button className="btn-icon" onClick={() => setSelectedApp(null)}><X size={20} /></button>
+              </div>
+              <div style={{ padding: '24px' }}>
+                <div style={{ background: '#f8fafc', padding: '16px', borderRadius: '8px', border: '1px solid #e2e8f0', marginBottom: '20px' }}>
+                  <h3 style={{ margin: '0 0 4px 0', fontSize: '16px' }}>{selectedApp.name}</h3>
+                  <span style={{ fontSize: '13px', color: '#64748b' }}>{selectedApp.appId} • {selectedApp.department}</span>
+                </div>
+                
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
+                  <div>
+                    <span style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Status</span>
+                    <p style={{ margin: '4px 0 0 0', fontWeight: 600, color: '#0f172a' }}>{selectedApp.status.replace('-', ' ').toUpperCase()}</p>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Submitted On</span>
+                    <p style={{ margin: '4px 0 0 0', fontWeight: 600, color: '#0f172a' }}>{selectedApp.submittedDate}</p>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Estimated Completion</span>
+                    <p style={{ margin: '4px 0 0 0', fontWeight: 600, color: '#10b981' }}>{selectedApp.slaDate}</p>
+                  </div>
+                  <div>
+                    <span style={{ fontSize: '12px', color: '#64748b', textTransform: 'uppercase', fontWeight: 600 }}>Documents Attached</span>
+                    <p style={{ margin: '4px 0 0 0', fontWeight: 600, color: '#0f172a' }}>4 Files Verified</p>
+                  </div>
+                </div>
+              </div>
+              <div className="modal-actions" style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'flex-end' }}>
+                <Button variant="primary" onClick={() => setSelectedApp(null)}>Close</Button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </DashboardLayout>
   );

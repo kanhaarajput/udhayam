@@ -150,6 +150,33 @@
 .comp-status-badge.upcoming { background: #eff6ff; color: #2563eb; }
 .comp-status-badge.urgent { background: #fef2f2; color: #dc2626; }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .page-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .comp-card .comp-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .comp-date-box {
+    margin: 0;
+  }
+  .comp-status-col {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .comp-action {
+    width: 100%;
+  }
+  .comp-action button {
+    width: 100%;
+  }
+}
+
 .comp-action {
   flex-shrink: 0;
 }

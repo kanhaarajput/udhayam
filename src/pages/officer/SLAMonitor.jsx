@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { OfficerLayout } from '../../layouts/OfficerLayout';
 import { Card, CardContent } from '../../components/Card';
 import { Button } from '../../components/Button';
-import { Clock, AlertTriangle, XCircle, ArrowRight, ShieldAlert } from 'lucide-react';
+import { Clock, AlertTriangle, XCircle, ArrowRight, ShieldAlert, X } from 'lucide-react';
 import './SLAMonitor.css';
 
 const SLA_DATA = [
@@ -29,6 +30,9 @@ const SLA_DATA = [
 ];
 
 export function SLAMonitor() {
+  const navigate = useNavigate();
+  const [showEscalationModal, setShowEscalationModal] = useState(false);
+
   return (
     <OfficerLayout>
       <div className="sla-monitor-page">
@@ -37,7 +41,7 @@ export function SLAMonitor() {
             <h1 className="page-title">SLA Monitor</h1>
             <p className="page-subtitle">Track applications at risk of breaching Service Level Agreements.</p>
           </div>
-          <Button variant="outline">
+          <Button variant="outline" onClick={() => setShowEscalationModal(true)}>
             <ShieldAlert size={16} style={{ marginRight: '6px' }} /> Escalation Matrix
           </Button>
         </div>
@@ -107,7 +111,7 @@ export function SLAMonitor() {
                     )}
                   </td>
                   <td>
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" onClick={() => navigate('/officer/review')}>
                       Process Now <ArrowRight size={14} style={{ marginLeft: '4px' }}/>
                     </Button>
                   </td>
@@ -116,6 +120,62 @@ export function SLAMonitor() {
             </tbody>
           </table>
         </div>
+
+        {/* Escalation Matrix Modal */}
+        {showEscalationModal && (
+          <div className="modal-overlay">
+            <div className="modal-content" style={{ maxWidth: '600px' }}>
+              <div className="modal-header">
+                <h2>Escalation Matrix</h2>
+                <button className="btn-icon" onClick={() => setShowEscalationModal(false)}>
+                  <X size={20} />
+                </button>
+              </div>
+              <div style={{ padding: '24px' }}>
+                <p style={{ margin: '0 0 20px 0', fontSize: '14px', color: '#475569' }}>
+                  Standard operating procedure for handling applications that breach SLA deadlines.
+                </p>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  
+                  <div style={{ padding: '16px', borderRadius: '8px', border: '1px solid #fecaca', background: '#fef2f2' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 700, color: '#dc2626' }}>Level 1: Officer Alert</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#991b1b', background: '#fee2e2', padding: '2px 8px', borderRadius: '12px' }}>Day 0 to +2</span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '13px', color: '#7f1d1d' }}>
+                      Application is flagged in red on the SLA Monitor. Automated email reminder sent to the assigned processing officer.
+                    </p>
+                  </div>
+
+                  <div style={{ padding: '16px', borderRadius: '8px', border: '1px solid #fed7aa', background: '#fff7ed' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 700, color: '#c2410c' }}>Level 2: Supervisor Escalation</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#9a3412', background: '#ffedd5', padding: '2px 8px', borderRadius: '12px' }}>Day +3 to +5</span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '13px', color: '#7c2d12' }}>
+                      Application is escalated to the Department Supervisor. Justification must be provided in the system for the delay.
+                    </p>
+                  </div>
+
+                  <div style={{ padding: '16px', borderRadius: '8px', border: '1px solid #e5e7eb', background: '#f9fafb' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
+                      <span style={{ fontWeight: 700, color: '#1f2937' }}>Level 3: HOD & Admin Review</span>
+                      <span style={{ fontSize: '12px', fontWeight: 600, color: '#374151', background: '#e5e7eb', padding: '2px 8px', borderRadius: '12px' }}>Day +5 onwards</span>
+                    </div>
+                    <p style={{ margin: 0, fontSize: '13px', color: '#4b5563' }}>
+                      Case is forwarded to the Head of Department (HOD) and flagged in the Admin Dashboard Bottleneck Monitor. Penalty protocols may initiate.
+                    </p>
+                  </div>
+
+                </div>
+              </div>
+              <div className="modal-actions" style={{ padding: '16px 24px', borderTop: '1px solid #e2e8f0', display: 'flex', justifyContent: 'flex-end' }}>
+                <Button variant="primary" onClick={() => setShowEscalationModal(false)}>Close Matrix</Button>
+              </div>
+            </div>
+          </div>
+        )}
+
       </div>
     </OfficerLayout>
   );

@@ -293,3 +293,31 @@
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .checklist-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .progress-stats {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .checklist-item-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .ci-left {
+    width: 100%;
+  }
+  .ci-right {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 48px;
+  }
+  .checklist-item-body {
+    padding: 0 20px 20px 20px;
+  }
+}

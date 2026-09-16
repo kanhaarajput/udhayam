@@ -104,6 +104,7 @@
 
 .qi-status.response-received { background: #ecfdf5; color: #059669; }
 .qi-status.awaiting-applicant { background: #fefce8; color: #d97706; }
+.qi-status.resolved { background: #f1f5f9; color: #64748b; }
 
 /* Main Thread */
 .query-thread-card {

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import { OfficerLayout } from '../../layouts/OfficerLayout';
 import { Card, CardContent } from '../../components/Card';
 import { Button } from '../../components/Button';
@@ -32,7 +33,54 @@ const QUERIES_DATA = [
 ];
 
 export function OfficialQueries() {
-  const [selectedQuery, setSelectedQuery] = useState(QUERIES_DATA[0]);
+  const [queries, setQueries] = useState(QUERIES_DATA);
+  const [selectedQuery, setSelectedQuery] = useState(queries[0]);
+  const [replyText, setReplyText] = useState('');
+
+  const handleSendReply = () => {
+    if (!replyText.trim()) {
+      toast.error('Please type a message before sending.');
+      return;
+    }
+
+    const newMessage = {
+      sender: 'Officer',
+      text: replyText,
+      date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })
+    };
+
+    const updatedQueries = queries.map(q => {
+      if (q.id === selectedQuery.id) {
+        return {
+          ...q,
+          status: 'Awaiting Applicant',
+          messages: [...q.messages, newMessage]
+        };
+      }
+      return q;
+    });
+
+    setQueries(updatedQueries);
+    setSelectedQuery(updatedQueries.find(q => q.id === selectedQuery.id));
+    setReplyText('');
+    toast.success('Reply sent successfully.');
+  };
+
+  const handleResolve = () => {
+    const updatedQueries = queries.map(q => {
+      if (q.id === selectedQuery.id) {
+        return {
+          ...q,
+          status: 'Resolved'
+        };
+      }
+      return q;
+    });
+
+    setQueries(updatedQueries);
+    setSelectedQuery(updatedQueries.find(q => q.id === selectedQuery.id));
+    toast.success('Query marked as resolved.');
+  };
 
   return (
     <OfficerLayout>
@@ -52,7 +100,7 @@ export function OfficialQueries() {
               <input type="text" placeholder="Search queries..." />
             </div>
             <div className="query-list">
-              {QUERIES_DATA.map(q => (
+              {queries.map(q => (
                 <div 
                   key={q.id} 
                   className={`query-item ${selectedQuery.id === q.id ? 'active' : ''}`}
@@ -66,6 +114,7 @@ export function OfficialQueries() {
                   <span className={`qi-status ${q.status.toLowerCase().replace(' ', '-')}`}>
                     {q.status === 'Response Received' && <CheckCircle2 size={12} style={{ marginRight: '4px' }}/>}
                     {q.status === 'Awaiting Applicant' && <AlertCircle size={12} style={{ marginRight: '4px' }}/>}
+                    {q.status === 'Resolved' && <CheckCircle2 size={12} style={{ marginRight: '4px', color: '#10b981' }}/>}
                     {q.status}
                   </span>
                 </div>
@@ -80,8 +129,8 @@ export function OfficialQueries() {
                 <h3>{selectedQuery.subject}</h3>
                 <span className="th-meta">Ref: {selectedQuery.appId} • {selectedQuery.applicant}</span>
               </div>
-              {selectedQuery.status === 'Response Received' && (
-                <Button variant="outline" size="sm">Mark as Resolved</Button>
+              {selectedQuery.status !== 'Resolved' && (
+                <Button variant="outline" size="sm" onClick={handleResolve}>Mark as Resolved</Button>
               )}
             </div>
             <CardContent className="thread-content">
@@ -103,9 +152,16 @@ export function OfficialQueries() {
               </div>
               
               <div className="reply-box">
-                <textarea placeholder="Type your reply here..."></textarea>
+                <textarea 
+                  placeholder="Type your reply here..." 
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                  disabled={selectedQuery.status === 'Resolved'}
+                ></textarea>
                 <div className="reply-actions">
-                  <Button variant="primary">Send Reply</Button>
+                  <Button variant="primary" onClick={handleSendReply} disabled={selectedQuery.status === 'Resolved'}>
+                    {selectedQuery.status === 'Resolved' ? 'Query Resolved' : 'Send Reply'}
+                  </Button>
                 </div>
               </div>
             </CardContent>
