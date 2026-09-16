@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, FileText, CheckSquare, MessageSquare, BarChart, Bell, Search, User, Clock, AlertTriangle } from 'lucide-react';
+import { BarChart3, Settings, Shield, Bell, Search, Activity, Users, LayoutDashboard, Clock, Building2, ShieldAlert, PieChart } from 'lucide-react';
 import { NotificationBell } from '../components/NotificationBell';
-import './OfficerLayout.css';
+import './OfficerLayout.css'; // Reusing officer layout CSS for the sidebar
 
-export function OfficerLayout({ children }) {
+export function AdminLayout({ children }) {
   const location = useLocation();
   
   const navItems = [
-    { name: 'Dashboard Overview', path: '/officer/dashboard', icon: <LayoutDashboard size={20} /> },
-    { name: 'Document Review', path: '/officer/review', icon: <FileText size={20} /> },
-    { name: 'Inspections', path: '/officer/inspections', icon: <CheckSquare size={20} /> },
-    { name: 'SLA Monitor', path: '/officer/sla', icon: <Clock size={20} /> },
-    { name: 'Risk Review', path: '/officer/risk', icon: <AlertTriangle size={20} /> },
-    { name: 'Queries', path: '/officer/queries', icon: <MessageSquare size={20} /> },
+    { name: 'Dashboard Overview', path: '/admin/dashboard', icon: <LayoutDashboard size={20} /> },
+    { name: 'Analytics', path: '/analytics', icon: <BarChart3 size={20} /> },
+    { name: 'Bottleneck Monitor', path: '/admin/bottlenecks', icon: <Activity size={20} /> },
+    { name: 'SLA Monitoring', path: '/admin/sla', icon: <Clock size={20} /> },
+    { name: 'Department Perf.', path: '/admin/departments', icon: <Building2 size={20} /> },
+    { name: 'Compliance', path: '/admin/compliance', icon: <ShieldAlert size={20} /> },
+    { name: 'Schemes & Policies', path: '/admin/schemes', icon: <PieChart size={20} /> },
+    { name: 'User Management', path: '/users', icon: <Users size={20} /> },
   ];
 
   return (
@@ -21,10 +23,8 @@ export function OfficerLayout({ children }) {
       {/* Sidebar */}
       <aside className="officer-sidebar">
         <div className="sidebar-brand">
-          <div className="logo-placeholder" style={{ backgroundColor: 'white' }}>
-             <img src="/logo.svg" alt="UdyamOne" style={{ width: '100%', height: '100%' }} />
-          </div>
-          <h2>Officer Portal</h2>
+          <Shield size={28} style={{ color: '#8b5cf6' }} />
+          <h2>MSInS Admin</h2>
         </div>
         
         <nav className="sidebar-nav">
@@ -50,13 +50,13 @@ export function OfficerLayout({ children }) {
         <header className="officer-topbar">
           <div className="search-container">
             <Search size={20} className="search-icon" />
-            <input type="text" placeholder="Search Application ID, Entrepreneur Name..." />
+            <input type="text" placeholder="Search departments, metrics..." />
           </div>
           <div className="topbar-actions">
             <NotificationBell />
             <div className="user-profile">
-              <img src="https://ui-avatars.com/api/?name=Officer+Sharma&background=16a34a&color=fff" alt="Profile" className="profile-img" />
-              <span className="user-name">Officer Sharma</span>
+              <img src="https://ui-avatars.com/api/?name=Admin&background=8b5cf6&color=fff" alt="Profile" className="profile-img" />
+              <span className="user-name">System Admin</span>
             </div>
           </div>
         </header>

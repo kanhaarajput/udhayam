@@ -1,0 +1,140 @@
+.bottlenecks-page {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.bn-section h3 {
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.bn-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.bn-card {
+  border-top: 4px solid #e2e8f0;
+}
+
+.bn-card.critical { border-top-color: #ef4444; }
+.bn-card.warning { border-top-color: #f59e0b; }
+.bn-card.normal { border-top-color: #10b981; }
+
+.bn-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bn-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bn-dept-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0f172a;
+}
+
+.bn-dept-info h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.bn-status-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.bn-card.critical .bn-status-badge { background: #fef2f2; color: #dc2626; }
+.bn-card.warning .bn-status-badge { background: #fffbeb; color: #d97706; }
+.bn-card.normal .bn-status-badge { background: #ecfdf5; color: #059669; }
+
+.bn-stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bn-stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bn-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.bn-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.bn-table-content {
+  padding: 0;
+}
+
+.bn-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.bn-table th {
+  background: #f8fafc;
+  padding: 16px 24px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.bn-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+}
+
+.bn-table tr:last-child td {
+  border-bottom: none;
+}
+
+.impact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+
+.impact-badge.critical { background: #fef2f2; color: #dc2626; }
+.impact-badge.high { background: #fffbeb; color: #d97706; }
+.impact-badge.low { background: #f1f5f9; color: #475569; }
+
+.text-danger { color: #dc2626; }
+.text-muted { color: #94a3b8; }
+.font-semibold { font-weight: 600; }

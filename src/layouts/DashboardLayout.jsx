@@ -19,24 +19,15 @@ export function DashboardLayout({ children }) {
   const unreadCount = notifications.filter(n => !n.read).length;
 
   const navItems = [
-    { path: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
-    { path: '/profile', icon: User, label: 'My Profile' },
-    { path: '/vault', icon: FolderLock, label: 'Document Vault' },
-    { path: '/find-approvals', icon: Search, label: 'Find Approvals' },
+    { path: '/dashboard', icon: LayoutDashboard, label: 'Overview' },
+    { path: '/projects', icon: User, label: 'My Projects' },
+    { path: '/checklist', icon: CheckSquare, label: 'Find Approvals' },
     { path: '/tracking', icon: FileText, label: 'My Applications' },
-    { path: '/calendar', icon: CheckSquare, label: 'Compliance' },
+    { path: '/upload-documents', icon: FolderLock, label: 'Documents' },
+    { path: '/applicant/inspections', icon: Search, label: 'Inspections' },
+    { path: '/calendar', icon: CheckSquare, label: 'Compliance & Renewals' },
     { path: '/schemes', icon: ShieldAlert, label: 'Schemes & Incentives' },
-    { path: '/analytics', icon: BarChart3, label: 'Analytics & Reports' },
-    { path: '/team', icon: Users, label: 'Team & Access' },
-    { path: '/audit', icon: Shield, label: 'Audit Logs' },
-    { path: '/automations', icon: Zap, label: 'Automations' },
-    { path: '/developer', icon: Terminal, label: 'Developer API' },
-    { path: '/messages', icon: Mail, label: 'Messages', badge: 3 },
-    { path: '/referrals', icon: Gift, label: 'Refer & Earn' },
-    { path: '/integrations', icon: Blocks, label: 'Integrations' },
-    { path: '/status', icon: Activity, label: 'System Status' },
-    { path: '/helpdesk', icon: LifeBuoy, label: 'Help & Support' },
-    { path: '/settings', icon: Settings, label: 'Settings' },
+    { path: '/helpdesk', icon: LifeBuoy, label: 'AI Helpdesk' },
   ];
 
   return (

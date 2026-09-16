@@ -29,7 +29,39 @@ const initialApplications = [
 ];
 
 export const useAppStore = create((set) => ({
-  language: 'en', // Default language
+  // ── Role Management ──
+  userRole: null, // 'applicant' | 'official' | 'admin'
+  setUserRole: (role) => set({ userRole: role }),
+
+  // ── Applicant Business Profile Form ──
+  businessFormData: {
+    sector: '',
+    projectSize: '',
+    location: '',
+    stage: '',
+  },
+  setBusinessFormData: (data) => set({ businessFormData: data }),
+
+  // ── Generated Checklist State ──
+  generatedChecklist: [],
+  setGeneratedChecklist: (checklist) => set({ generatedChecklist: checklist }),
+  updateChecklistItemStatus: (id, newStatus) => set((state) => ({
+    generatedChecklist: state.generatedChecklist.map(item =>
+      item.id === id ? { ...item, status: newStatus } : item
+    )
+  })),
+
+  // ── Review Queue (Officer) ──
+  reviewQueue: [],
+  setReviewQueue: (queue) => set({ reviewQueue: queue }),
+  updateReviewStatus: (id, newStatus) => set((state) => ({
+    reviewQueue: state.reviewQueue.map(app =>
+      app.id === id ? { ...app, status: newStatus } : app
+    )
+  })),
+
+  // ── Existing State ──
+  language: 'en',
   theme: localStorage.getItem('theme') || 'light',
   hasCompletedOnboarding: false,
   applications: initialApplications,
@@ -60,7 +92,6 @@ export const useAppStore = create((set) => ({
     logoUrl: 'https://ui-avatars.com/api/?name=ABC+Foods&background=0D8ABC&color=fff'
   },
   
-  // Settings & Security
   userSettings: {
     mfaEnabled: false,
     notifications: {
@@ -74,10 +105,8 @@ export const useAppStore = create((set) => ({
   activeSessions: [
     { id: 'sess-1', device: 'Windows PC (Chrome)', location: 'Mumbai, IN', ip: '192.168.1.45', lastActive: 'Just now', current: true },
     { id: 'sess-2', device: 'iPhone 13 (Safari)', location: 'Pune, IN', ip: '117.204.6.12', lastActive: '2 hours ago', current: false },
-    { id: 'sess-3', device: 'MacBook Pro (Firefox)', location: 'Delhi, IN', ip: '103.44.12.8', lastActive: '3 days ago', current: false }
   ],
 
-  // Integrations Hub
   integrations: {
     'tally': { connected: false },
     'whatsapp': { connected: true },
@@ -86,35 +115,30 @@ export const useAppStore = create((set) => ({
     'digilocker': { connected: true }
   },
 
-  // Team Management
   teamMembers: [
     { id: 'user-1', name: 'Lalit (You)', email: 'owner@abcfoods.com', role: 'Owner', status: 'Active', lastActive: 'Just now' },
     { id: 'user-2', name: 'Aditi Sharma', email: 'aditi.legal@abcfoods.com', role: 'Legal Advisor', status: 'Active', lastActive: '2 hrs ago' }
   ],
   
-  // Action to switch language
+  // ── Actions ──
   setLanguage: (lang) => set({ language: lang }),
 
-  // Action to toggle theme
   toggleTheme: () => set((state) => {
     const newTheme = state.theme === 'light' ? 'dark' : 'light';
     localStorage.setItem('theme', newTheme);
     return { theme: newTheme };
   }),
   
-  // Action to add a new application (Entrepreneur Flow)
   addApplication: (newApp) => set((state) => ({
     applications: [newApp, ...state.applications]
   })),
 
-  // Action to update an application's status (Officer Flow)
   updateApplicationStatus: (id, newStatus, newVariant) => set((state) => ({
     applications: state.applications.map(app => 
       app.id === id ? { ...app, status: newStatus, variant: newVariant } : app
     )
   })),
 
-  // Notifications
   addNotification: (notification) => set((state) => ({
     notifications: [{ id: Date.now().toString(), read: false, time: 'Just now', ...notification }, ...state.notifications]
   })),
@@ -125,7 +149,6 @@ export const useAppStore = create((set) => ({
     )
   })),
 
-  // Vault Documents
   addVaultDocument: (doc) => set((state) => ({
     vaultDocuments: [{ id: Date.now().toString(), ...doc }, ...state.vaultDocuments]
   })),
@@ -134,12 +157,10 @@ export const useAppStore = create((set) => ({
     vaultDocuments: state.vaultDocuments.filter(doc => doc.id !== id)
   })),
 
-  // Business Profile
   updateBusinessProfile: (newProfileData) => set((state) => ({
     businessProfile: { ...state.businessProfile, ...newProfileData }
   })),
 
-  // Settings & Security
   toggleMFA: (status) => set((state) => ({
     userSettings: { ...state.userSettings, mfaEnabled: status }
   })),
@@ -161,7 +182,6 @@ export const useAppStore = create((set) => ({
     activeSessions: state.activeSessions.filter(sess => sess.id !== id)
   })),
 
-  // Integrations Hub
   toggleIntegration: (id, status) => set((state) => ({
     integrations: {
       ...state.integrations,
@@ -169,7 +189,6 @@ export const useAppStore = create((set) => ({
     }
   })),
 
-  // Onboarding
   completeOnboarding: (data) => set((state) => ({
     hasCompletedOnboarding: true,
     businessProfile: { ...state.businessProfile, ...data.businessProfile },
@@ -182,7 +201,6 @@ export const useAppStore = create((set) => ({
     }
   })),
 
-  // Team Management
   inviteTeamMember: (member) => set((state) => ({
     teamMembers: [...state.teamMembers, member]
   }))

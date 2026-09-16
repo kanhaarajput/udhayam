@@ -1,0 +1,121 @@
+.admin-sla-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sla-breakdown-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sla-bd-card {
+  border-top: 4px solid #e2e8f0;
+}
+
+.sla-bd-card.safe { border-top-color: #10b981; }
+.sla-bd-card.risk { border-top-color: #f59e0b; }
+.sla-bd-card.breached { border-top-color: #ef4444; }
+
+.sla-bd-content {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sla-bd-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-grow: 1;
+}
+
+.sla-bd-text h2 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.sla-bd-text span {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sla-bd-pct {
+  font-size: 24px;
+  font-weight: 800;
+  color: #94a3b8;
+}
+
+.sla-dept-content {
+  padding: 0;
+}
+
+.sla-dept-content h3 {
+  margin: 0;
+  padding: 20px 24px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sla-dept-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.sla-dept-table th {
+  background: #f8fafc;
+  padding: 16px 24px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.sla-dept-table td {
+  padding: 16px 24px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #334155;
+  vertical-align: middle;
+}
+
+.sla-dept-table tr:last-child td {
+  border-bottom: none;
+}
+
+.progress-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.text-success { color: #059669; }
+.text-warning { color: #d97706; }
+.text-danger { color: #dc2626; }
+.font-semibold { font-weight: 600; }

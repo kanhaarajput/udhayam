@@ -1,0 +1,238 @@
+.scheme-analytics-page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sa-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.sa-kpi-card {
+  transition: transform 0.2s;
+}
+
+.sa-kpi-card:hover {
+  transform: translateY(-4px);
+}
+
+.sa-kpi-content {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.sa-kpi-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8fafc;
+  flex-shrink: 0;
+}
+
+.sa-kpi-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sa-kpi-val {
+  font-size: 28px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.1;
+}
+
+.sa-kpi-lbl {
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sa-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sa-scheme-card {
+  transition: box-shadow 0.2s;
+}
+
+.sa-scheme-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.sa-scheme-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sa-scheme-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.sa-sh-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.sa-sh-title h3 {
+  margin: 0 0 4px 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.sa-dept {
+  font-size: 13px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+.sa-scheme-metrics {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  background: #f8fafc;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.sa-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sa-metric.utilization {
+  flex-grow: 1;
+  min-width: 200px;
+}
+
+.sa-m-val {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.sa-m-lbl {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sa-m-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sa-m-pct {
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.sa-progress-bar {
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.sa-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+
+.text-primary { color: #3b82f6; }
+.text-success { color: #10b981; }
+.text-warning { color: #f59e0b; }
+.font-semibold { font-weight: 600; }
+
+.spin-anim {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Modal CSS */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-icon:hover {
+  background: #f1f5f9;
+  color: #0f172a;
+}

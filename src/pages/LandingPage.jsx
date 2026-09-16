@@ -161,7 +161,7 @@ export function LandingPage() {
         <div className="cta-container">
           <h2>Ready to scale your compliance?</h2>
           <p>Join 5,000+ forward-thinking Indian enterprises today.</p>
-          <Button variant="primary" size="lg" className="cta-footer-btn" onClick={() => navigate('/dashboard')}>
+          <Button variant="primary" size="lg" className="cta-footer-btn" onClick={() => navigate('/login')}>
             Get Started Now <Zap size={18} style={{ marginLeft: '8px', fill: 'currentColor' }}/>
           </Button>
         </div>
@@ -170,8 +170,8 @@ export function LandingPage() {
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="footer-brand">
-            <div className="brand-logo">U</div>
-            <span className="brand-text">UdyamOne</span>
+            <Shield className="gov-shield" size={24} style={{ color: '#0d9488' }} />
+            <span className="brand-text" style={{ fontSize: '20px', fontWeight: 800, color: '#0f172a' }}>UdyamOne</span>
             <p>© 2026 UdyamOne Technologies. All rights reserved.</p>
           </div>
           <div className="footer-links">
